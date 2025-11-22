@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b9ced300674e0cf46a5ae9a907deb91b
+guid: d5e4617acec6f974db50dcdc3594c50f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,7 +134,112 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Corridor 2 pintu kanan new-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1980
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a35c7e01862582439b2805f2dc7c599
+      internalID: 666695211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corridor 2 pintu kanan new-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 0
+        width: 1980
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd655f4d9543e0746841c43a46fc1315
+      internalID: -1363706769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corridor 2 pintu kanan new-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 3960
+        y: 0
+        width: 1980
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4824aaa6fc1ce5040b6539483a625278
+      internalID: 80501984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corridor 2 pintu kanan new-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 5940
+        y: 0
+        width: 1980
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2477ac58d9293fd47b91ea743e0fad59
+      internalID: 804425439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corridor 2 pintu kanan new-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 0
+        width: 1980
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3b1405d5f532b944a0b0e6d008f2158
+      internalID: -1334186386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +250,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Corridor 2 pintu kanan new-Sheet_0: 666695211
+      Corridor 2 pintu kanan new-Sheet_1: -1363706769
+      Corridor 2 pintu kanan new-Sheet_2: 80501984
+      Corridor 2 pintu kanan new-Sheet_3: 804425439
+      Corridor 2 pintu kanan new-Sheet_4: -1334186386
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

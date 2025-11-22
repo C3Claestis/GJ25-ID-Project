@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b9ced300674e0cf46a5ae9a907deb91b
+guid: 3660c1cb79a02004c848eafe93cb899c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,7 +134,112 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Corridor 2 pintu Kiri new-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1980
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2509073882dcb1a42aaaa0edf498eed5
+      internalID: 338387223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corridor 2 pintu Kiri new-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 0
+        width: 1980
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b78834a33a6917d4c98f71e1675f6015
+      internalID: -11137466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corridor 2 pintu Kiri new-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 3960
+        y: 0
+        width: 1980
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2c6416cd70e2724ba387079c12f493a
+      internalID: 336558632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corridor 2 pintu Kiri new-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 5940
+        y: 0
+        width: 1980
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdf6b14f7659ba947b3ef486cceac9c0
+      internalID: -199489477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corridor 2 pintu Kiri new-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 7920
+        y: 0
+        width: 1980
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a07645533c232f4eb5d703ab68a0e93
+      internalID: -262100054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +250,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Corridor 2 pintu Kiri new-Sheet_0: 338387223
+      Corridor 2 pintu Kiri new-Sheet_1: -11137466
+      Corridor 2 pintu Kiri new-Sheet_2: 336558632
+      Corridor 2 pintu Kiri new-Sheet_3: -199489477
+      Corridor 2 pintu Kiri new-Sheet_4: -262100054
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
