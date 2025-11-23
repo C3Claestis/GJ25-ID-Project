@@ -15,4 +15,32 @@ public class PuzzleManager : MonoBehaviour
     {
         
     }
+
+    public void DisableObjektif(GameObject gameObject)
+    {
+        // Memulai Coroutine untuk menangani jeda waktu
+        StartCoroutine(DisableObjektifCoroutine(gameObject));
+    }
+
+    private IEnumerator DisableObjektifCoroutine(GameObject gameObject)
+    {
+        // Mengambil komponen Animator terlebih dahulu
+        Animator animator = gameObject.GetComponentInChildren<Animator>();
+        if (animator != null)
+        {
+            
+            animator.SetFloat("value", 0);
+        }
+        else
+        {
+            Animator anim_ = gameObject.GetComponent<Animator>();
+            anim_.SetFloat("value", 0);
+        }
+
+        // Berikan jeda waktu 1 detik
+        yield return new WaitForSeconds(0.25f);
+
+        // Nonaktifkan GameObject setelah animasi selesai (atau setelah jeda)
+        gameObject.SetActive(false);
+    }
 }

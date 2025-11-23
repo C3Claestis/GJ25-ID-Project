@@ -20,6 +20,7 @@ public class ManagerGame : MonoBehaviour
     [SerializeField] private GameObject jumpscareObject;
 
     private Animator previouslyActiveAnimator = null;
+    private Coroutine _jumpscareCoroutine = null;
 
     private int _indexRandomJumpscare = 0;
     private int _randomIndex = 0;
@@ -63,7 +64,7 @@ public class ManagerGame : MonoBehaviour
         if (_indexRandomJumpscare == _randomIndex)
         {
             // Mulai coroutine jumpscare dan langsung reset index agar tidak ter-trigger berulang kali
-            StartCoroutine(JumpscareSequence());
+            _jumpscareCoroutine = StartCoroutine(JumpscareSequence());
 
             // Acak ulang _indexRandomJumpscare ke nilai baru yang berbeda dari yang sekarang
             if (objectsToManage.Count > 1)
@@ -116,6 +117,13 @@ public class ManagerGame : MonoBehaviour
     IEnumerator HandleInputAndTransition(float animatorValue)
     {
         currentState = PlayerInputState.Processing;
+
+        // Hentikan jumpscare jika sedang berjalan
+        if (_jumpscareCoroutine != null)
+        {
+            StopCoroutine(_jumpscareCoroutine);
+            _jumpscareCoroutine = null;
+        }
 
         // Matikan jumpscare jika sedang aktif saat transisi dimulai
         jumpscareObject.SetActive(false);
@@ -242,8 +250,9 @@ public class ManagerGame : MonoBehaviour
         }
 
         // 1. Tunggu selama 2 detik
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
 
         jumpscareObject.SetActive(true);
+        _jumpscareCoroutine = null; // Reset setelah selesai
     }
 }
