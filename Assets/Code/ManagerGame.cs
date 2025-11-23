@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ManagerGame : MonoBehaviour
 {
+    [SerializeField] AudioSource bgm;
+
     [SerializeField] Animator _transisi_fade;
 
     [SerializeField] float timeDisplayOn;
@@ -12,6 +15,9 @@ public class ManagerGame : MonoBehaviour
     [SerializeField] private float zoomSpeed = 0.5f;
     [SerializeField] private float minScale = 1f;
     [SerializeField] private float maxScale = 2f;
+
+    [Header("Start")]
+    [SerializeField] private Animator returnAnimatorAfterJumpscare;
 
     [Header("List Animator (UI/Scene Objects)")]
     [SerializeField] private List<Animator> objectsToManage;
@@ -32,6 +38,12 @@ public class ManagerGame : MonoBehaviour
     }
 
     private PlayerInputState currentState;
+
+    private bool canPress = true;
+    public void SetCanPress(bool value)
+    {
+        canPress = value;
+    }
 
     void Start()
     {
@@ -78,17 +90,28 @@ public class ManagerGame : MonoBehaviour
                 _indexRandomJumpscare = newJumpscareIndex;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     //Fungsi untuk player input
     IEnumerator PlayerInputCoroutine()
     {
-        while (true) 
+        while (true)
         {
-            if (currentState == PlayerInputState.WaitingForInput)
+            if (currentState == PlayerInputState.WaitingForInput && canPress)
             {
+                // INPUT KIRI
                 if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
+                    SFXManager.Instance.PlaySFX(0);
+
+                    canPress = false;                 // Kunci input
+                    StartCoroutine(UnlockInput());    // Buka lagi setelah 2 detik
+
                     StartCoroutine(HandleInputAndTransition(2f));
 
                     if (_indexRandomJumpscare == _randomIndex)
@@ -97,8 +120,14 @@ public class ManagerGame : MonoBehaviour
                     }
                 }
 
+                // INPUT KANAN
                 else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
                 {
+                    SFXManager.Instance.PlaySFX(0);
+                    
+                    canPress = false;                 // Kunci input
+                    StartCoroutine(UnlockInput());    // Buka lagi setelah 2 detik
+
                     StartCoroutine(HandleInputAndTransition(1f));
 
                     if (_indexRandomJumpscare == _randomIndex)
@@ -106,7 +135,6 @@ public class ManagerGame : MonoBehaviour
                         _indexRandomJumpscare = Random.Range(0, objectsToManage.Count);
                     }
                 }
-
             }
 
             yield return null;
@@ -195,6 +223,47 @@ public class ManagerGame : MonoBehaviour
         return chosen;
     }
 
+    void ActivateSpecifiedAnimator(Animator target)
+    {
+        if (target == null)
+            return;
+
+        // Reset animator sebelumnya
+        if (previouslyActiveAnimator != null)
+        {
+            CanvasGroup oldCg = previouslyActiveAnimator.GetComponent<CanvasGroup>();
+            if (oldCg == null)
+                oldCg = previouslyActiveAnimator.gameObject.AddComponent<CanvasGroup>();
+
+            oldCg.alpha = 0f;
+            oldCg.interactable = false;
+            oldCg.blocksRaycasts = false;
+        }        
+
+        _transisi_fade.gameObject.SetActive(true);
+
+        // Aktifkan animator tujuan
+        target.SetFloat("value", 0);
+
+        RectTransform rt = target.GetComponent<RectTransform>();
+        if (rt != null)
+            rt.localScale = new Vector3(minScale, minScale, minScale);
+
+        CanvasGroup cg = target.GetComponent<CanvasGroup>();
+        if (cg == null)
+            cg = target.gameObject.AddComponent<CanvasGroup>();
+
+        cg.alpha = 1f;
+        cg.interactable = true;
+        cg.blocksRaycasts = true;
+
+        // Simpan sebagai aktif sekarang
+        previouslyActiveAnimator = target;
+
+        // Update _randomIndex juga kalau kamu butuh
+        _randomIndex = 99;
+    }
+
     //Fungsi Reset animasi dan object
     void ResetAllInactiveObjects(Animator activeAnimator)
     {
@@ -246,13 +315,39 @@ public class ManagerGame : MonoBehaviour
         // 2. Setelah 2 detik, jalankan logika jumpscare
         if (previouslyActiveAnimator != null)
         {
-            previouslyActiveAnimator.SetFloat("value", 3f);            
+            previouslyActiveAnimator.SetFloat("value", 3f);
         }
 
-        // 1. Tunggu selama 2 detik
-        yield return new WaitForSeconds(2.5f);
+        // 1. Tunggu selama 1.5 detik
+        yield return new WaitForSeconds(3f);
+
+        bgm.Stop();
 
         jumpscareObject.SetActive(true);
-        _jumpscareCoroutine = null; // Reset setelah selesai
+
+        // Tunggu 3 detik sebelum dihilangkan lagi
+        yield return new WaitForSeconds(3f);
+
+        jumpscareObject.SetActive(false);
+
+        _transisi_fade.gameObject.SetActive(false);
+        // Setelah jumpscare, langsung ke animator tujuan
+        ActivateSpecifiedAnimator(returnAnimatorAfterJumpscare);
+
+        // Reset coroutine
+        _jumpscareCoroutine = null; 
+
+        bgm.Play();
+    }
+
+    IEnumerator UnlockInput()
+    {
+        yield return new WaitForSeconds(2f);
+        canPress = true;
+    }
+
+    public void Reset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

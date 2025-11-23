@@ -3,15 +3,85 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PuzzleManager : MonoBehaviour
 {
     private int digit1, digit2, digit3;
     private int index1, index2, index3;
 
+    ManagerGame manager;    
+
+    [Header("BGM")]
+    [SerializeField] AudioSource bgm;
+    [SerializeField] AudioClip finishing;
+
+    [Header("Anim Gembok")]
+    [SerializeField] Animator doorLockAnim;
+    [SerializeField] Animator gembokAnim;
+
+    [Header("Angka Gembok")]
+    [SerializeField] Text digit1Txt;
+    [SerializeField] Text digit2Txt;
+    [SerializeField] Text digit3Txt;
+
+    [Header("Button Gembok")]
+    [SerializeField] Button button1;
+    [SerializeField] Button button2;
+    [SerializeField] Button button3;
+
+    [SerializeField] GameObject finisher;
+
     void Start()
     {
         GeneratePuzzle();
+        manager = GetComponent<ManagerGame>();        
+    }
+
+    private bool isUnlocked = false;
+
+    void Update()
+    {
+        if (!isUnlocked) // hanya cek selama belum terbuka
+        {
+            if (digit1Txt.text == digit1.ToString() &&
+                digit2Txt.text == digit2.ToString() &&
+                digit3Txt.text == digit3.ToString())
+            {
+                StartCoroutine(OpenGembok());
+            }
+        }
+    }
+
+    IEnumerator OpenGembok()
+    {
+        isUnlocked = true;  // tandai agar tidak dipanggil lagi
+
+        button1.enabled = false;
+        button2.enabled = false;
+        button3.enabled = false;
+
+        gembokAnim.SetBool("IsOpen", isUnlocked);
+
+        yield return new WaitForSeconds(2);
+
+        
+        manager.SetCanPress(false);
+
+        // Nonaktifkan parent dari gembokAnim
+        if (gembokAnim.transform.parent != null)
+        {
+            gembokAnim.transform.parent.gameObject.SetActive(false);
+        }
+
+        doorLockAnim.SetBool("IsExit", true);
+
+        yield return new WaitForSeconds(3);
+
+        finisher.SetActive(true);
+
+        bgm.clip = finishing;
+        bgm.Play();
     }
 
     public void GeneratePuzzle()
