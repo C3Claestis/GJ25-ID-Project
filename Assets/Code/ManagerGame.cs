@@ -6,7 +6,6 @@ public class ManagerGame : MonoBehaviour
 {
     [SerializeField] Animator _transisi_fade;
 
-
     [SerializeField] float timeDisplayOn;
 
     [Header("Pengaturan Zoom")]
