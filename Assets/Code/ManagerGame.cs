@@ -124,7 +124,7 @@ public class ManagerGame : MonoBehaviour
                 else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
                 {
                     SFXManager.Instance.PlaySFX(0);
-                    
+
                     canPress = false;                 // Kunci input
                     StartCoroutine(UnlockInput());    // Buka lagi setelah 2 detik
 
@@ -200,7 +200,19 @@ public class ManagerGame : MonoBehaviour
         if (previouslyActiveAnimator != null && candidates.Count > 1)
             candidates.Remove(previouslyActiveAnimator);
 
-        Animator chosen = candidates[Random.Range(0, candidates.Count)];
+        int lastChosenIndex = -1; // di atas, sebagai field
+
+        // Pada saat memilih:
+        int index;
+
+        do
+        {
+            index = Random.Range(0, candidates.Count);
+        }
+        while (index == lastChosenIndex);
+
+        lastChosenIndex = index;
+        Animator chosen = candidates[index];
 
         // Set parameter untuk animator baru
         chosen.SetFloat("value", 0);
@@ -238,7 +250,7 @@ public class ManagerGame : MonoBehaviour
             oldCg.alpha = 0f;
             oldCg.interactable = false;
             oldCg.blocksRaycasts = false;
-        }        
+        }
 
         _transisi_fade.gameObject.SetActive(true);
 
@@ -335,9 +347,11 @@ public class ManagerGame : MonoBehaviour
         ActivateSpecifiedAnimator(returnAnimatorAfterJumpscare);
 
         // Reset coroutine
-        _jumpscareCoroutine = null; 
+        _jumpscareCoroutine = null;
 
         bgm.Play();
+        
+        canPress = true;
     }
 
     IEnumerator UnlockInput()
